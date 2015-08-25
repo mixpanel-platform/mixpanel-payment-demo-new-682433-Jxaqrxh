@@ -51,15 +51,16 @@
           }
           });
         }
+        setTimeout(function(){
+        window.location.reload(1);
+      }, 5000);
       };
       eventSelect.on('change', function(e, eventName) {
         propSelect.MPPropertySelect('setEvent', eventName);
         $("#by").show();
       });
       
-      setTimeout(function(){
-        window.location.reload(1);
-      }, 5000);
+      
       
       /*
       TODO: 
