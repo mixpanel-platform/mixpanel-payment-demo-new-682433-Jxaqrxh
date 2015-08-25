@@ -336,6 +336,7 @@ function loadLiquidFillGauge(elementId, value, config) {
           
           var config1 = liquidFillGaugeDefaultSettings();
           gaugeValue = 100*(totalEvents/thresholdValue);
+          config1.waveAnimateTime = 1000;
           var gauge1 = loadLiquidFillGauge("fillgauge1", gaugeValue, config1);
           });
         }
