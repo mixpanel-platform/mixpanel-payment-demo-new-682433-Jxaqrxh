@@ -21,7 +21,7 @@
         
       <div style="clear:both;"></div>
       <div id="graph"></div><br clear="all" /><br clear="all" />
-      <div id="thresholdMessage"></div>
+      <div id="thresholdMessage" style="font-size:40px; color:red;"></div>
     </div>
     <script>
       var eventSelect = $('#eventSelect').MPEventSelect();
@@ -46,7 +46,7 @@
               }
             }
           if(totalEvents > thresholdValue){
-            $( "#thresholdMessage" ).html('<span style="font-size=40px; color=red;">ERROR, over threshold</span>');
+            $( "#thresholdMessage" ).html('ERROR, over threshold');
           }
           });
         }
