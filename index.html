@@ -38,12 +38,14 @@
         alert(thresholdValue);
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            var totalEvents = 0;
             eventGraph.MPChart('setData', results);
             for(event in results.values()){
               for(date in results.values()[event]){
-                console.log(date);
+                totalEvents += results.values()[event][date];
               }
             }
+          console.log(totalEvents);
           });
         }
       };
