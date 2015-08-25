@@ -28,14 +28,13 @@
       var dateSelect  = $('#dateSelect').MPDatepicker();
       var eventGraph  = $('#graph').MPChart({chartType: 'bar'});
       var thresholdValue = $('#threshold').val();
-      alert(thresholdValue);
 
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
             propName  = propSelect.MPPropertySelect('value'),
             dateRange = dateSelect.MPDatepicker('value');
-
+        alert(thresholdValue);
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             eventGraph.MPChart('setData', results);
