@@ -46,7 +46,8 @@
               }
             }
           if(totalEvents > thresholdValue){
-            $( "#thresholdMessage" ).html('ERROR, over threshold');
+            eventDifference = totalEvents-thresholdValue;
+            $( "#thresholdMessage" ).html('ERROR, over threshold by '+eventDifference+" data points");
           }
           });
         }
