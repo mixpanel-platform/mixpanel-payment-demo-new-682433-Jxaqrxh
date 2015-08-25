@@ -39,6 +39,7 @@
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             eventGraph.MPChart('setData', results);
+            console.log(results);
           });
         }
       };
