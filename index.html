@@ -49,6 +49,9 @@
             eventDifference = totalEvents-thresholdValue;
             $( "#thresholdMessage" ).html('! Over threshold by '+eventDifference+" data points !");
           }
+          else{
+            $( "#thresholdMessage" ).html("");
+          }
           });
         }
         setTimeout(function(){
