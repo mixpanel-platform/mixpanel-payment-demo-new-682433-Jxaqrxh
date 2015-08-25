@@ -27,7 +27,6 @@
         
       <div style="clear:both;"></div>
       <div id="graph"></div><br clear="all" /><br clear="all" />
-      <div id="container"></div><br clear="all" /><br clear="all" />
       <div id="thresholdMessage" style="font-size:40px; color:red;"></div>
     </div>
     <script>
@@ -59,30 +58,7 @@
           else{
             $( "#thresholdMessage" ).html("");
           }
-          $('#container').dxCircularGauge({
-                scale: {
-                    startValue: 0,
-                    endValue: 2000,
-                    majorTick: {
-                        tickInterval: 100
-                    },
-                    label: {
-                        useRangeColors: true
-                    }
-                },    
-                rangeContainer: {
-                    palette: 'pastel',
-                    ranges: [
-                        { startValue: 0, endValue: thresholdValue },
-                        { startValue: thresholdValue, endValue: 2000 },
-                    ]
-                },
-                title: {
-                    text: 'Goal Gauge',
-                    font: { size: 28 }
-                },
-                value: 105
-            });
+
           });
         }
         setTimeout(function(){
