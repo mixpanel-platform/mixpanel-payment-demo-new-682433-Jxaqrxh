@@ -35,7 +35,6 @@
             propName  = propSelect.MPPropertySelect('value'),
             thresholdValue = $('#threshold').val();
             dateRange = dateSelect.MPDatepicker('value');
-        alert(thresholdValue);
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             var totalEvents = 0;
