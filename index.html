@@ -335,8 +335,8 @@ function loadLiquidFillGauge(elementId, value, config) {
           }
           
           var config1 = liquidFillGaugeDefaultSettings();
-          config1.maxValue = 100;
-          var gauge1 = loadLiquidFillGauge("fillgauge1", 55, config1);
+          gaugeValue = 100*(totalEvents/thresholdValue);
+          var gauge1 = loadLiquidFillGauge("fillgauge1", gaugeValue, config1);
           });
         }
         setTimeout(function(){
@@ -347,7 +347,6 @@ function loadLiquidFillGauge(elementId, value, config) {
         propSelect.MPPropertySelect('setEvent', eventName);
         $("#by").show();
       });
-      
       
       
       /*
