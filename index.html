@@ -33,6 +33,7 @@
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
             propName  = propSelect.MPPropertySelect('value'),
+            thresholdValue = $('#threshold').val();
             dateRange = dateSelect.MPDatepicker('value');
         alert(thresholdValue);
         if (eventName) {
