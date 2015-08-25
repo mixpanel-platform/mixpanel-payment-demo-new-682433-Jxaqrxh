@@ -13,82 +13,8 @@
           width: 100%;
       }
     </style>
-  </head>
-  <body class="mixpanel-platform-body">
-    <div class="mixpanel-platform-section">
-      <div id="eventSelect" style="float: left;"></div>
-      <div id="by" class="mixpanel-platform-label" style="margin-left: 10px; display: none;">by</div>
-      <div id="propSelect" style="float: left;"></div>
-      <div id="dateSelect" style="float: right;"></div>
-      <div style="clear: both;"></div><br clear="all" />
-      
-      <form id="property" style="margin-bottom: 15px; height: 31px">
-        <input type="text" autofocus placeholder="Threshold Value" name="threshold" id="threshold" value="" style="color: rgb(95,105,131); height: 30px; width: 500px; padding: 0 4px; font-size: 12px; border: 1px solid rgb(201,209,219)">
-        <input type="button" name="submitButton" id="submitButton" onclick="runQuery()" value="Generate Report" style="font-weight: bold; color: rgb(95,105,131); font-size: 12px; height: 31px; padding: 0 10px; margin-left: 10px; border: 1px solid rgb(201,209,219); background-color: rgb(242,244,246)"><br clear="all" /><br clear="all" />
-        </form>
-        
-      <div style="clear:both;"></div>
-      <div id="graph"></div><br clear="all" /><br clear="all" />
-      <svg id="fillgauge1" width="97%" height="250" onclick=""></svg><br clear="all" /><br clear="all" />
-      <div id="thresholdMessage" style="font-size:40px; color:red;"></div>
-    </div>
     <script>
-      var eventSelect = $('#eventSelect').MPEventSelect();
-      var propSelect  = $('#propSelect').MPPropertySelect();
-      var dateSelect  = $('#dateSelect').MPDatepicker();
-      var eventGraph  = $('#graph').MPChart({chartType: 'bar'});
-      var thresholdValue = $('#threshold').val();
-
-
-      var runQuery = function() {
-        var eventName = eventSelect.MPEventSelect('value'),
-            propName  = propSelect.MPPropertySelect('value'),
-            thresholdValue = $('#threshold').val();
-            dateRange = dateSelect.MPDatepicker('value');
-        if (eventName) {
-          MP.api.segment(eventName, propName, dateRange).done(function(results) {
-            var totalEvents = 0;
-            eventGraph.MPChart('setData', results);
-            for(event in results.values()){
-              for(date in results.values()[event]){
-                totalEvents += results.values()[event][date];
-              }
-            }
-          if(totalEvents > thresholdValue){
-            eventDifference = totalEvents-thresholdValue;
-            $( "#thresholdMessage" ).html('! Over threshold by '+eventDifference+" data points !");
-          }
-          else{
-            $( "#thresholdMessage" ).html("");
-          }
-          var gauge1 = loadLiquidFillGauge("fillgauge1", .55);
-          var config1 = liquidFillGaugeDefaultSettings();
-          config1.circleColor = "#FF7777";
-          config1.textColor = "#FF4444";
-          config1.waveTextColor = "#FFAAAA";
-          config1.waveColor = "#FFDDDD";
-          config1.circleThickness = 0.2;
-          config1.textVertPosition = 0.2;
-          config1.waveAnimateTime = 1000;
-          });
-        }
-        setTimeout(function(){
-          runQuery();
-        }, 30000);
-      };
-      eventSelect.on('change', function(e, eventName) {
-        propSelect.MPPropertySelect('setEvent', eventName);
-        $("#by").show();
-      });
-      
-      
-      
-      /*
-      TODO: 
-      - validation in threshold input
-      */
-      
-      /*!
+            /*!
  * @license Open source under BSD 2-clause (http://choosealicense.com/licenses/bsd-2-clause/)
  * Copyright (c) 2015, Curtis Bratton
  * All rights reserved.
@@ -356,6 +282,82 @@ function loadLiquidFillGauge(elementId, value, config) {
 
     return new GaugeUpdater();
 }
+    </script>
+  </head>
+  <body class="mixpanel-platform-body">
+    <div class="mixpanel-platform-section">
+      <div id="eventSelect" style="float: left;"></div>
+      <div id="by" class="mixpanel-platform-label" style="margin-left: 10px; display: none;">by</div>
+      <div id="propSelect" style="float: left;"></div>
+      <div id="dateSelect" style="float: right;"></div>
+      <div style="clear: both;"></div><br clear="all" />
+      
+      <form id="property" style="margin-bottom: 15px; height: 31px">
+        <input type="text" autofocus placeholder="Threshold Value" name="threshold" id="threshold" value="" style="color: rgb(95,105,131); height: 30px; width: 500px; padding: 0 4px; font-size: 12px; border: 1px solid rgb(201,209,219)">
+        <input type="button" name="submitButton" id="submitButton" onclick="runQuery()" value="Generate Report" style="font-weight: bold; color: rgb(95,105,131); font-size: 12px; height: 31px; padding: 0 10px; margin-left: 10px; border: 1px solid rgb(201,209,219); background-color: rgb(242,244,246)"><br clear="all" /><br clear="all" />
+        </form>
+        
+      <div style="clear:both;"></div>
+      <div id="graph"></div><br clear="all" /><br clear="all" />
+      <svg id="fillgauge1" width="97%" height="250" onclick=""></svg><br clear="all" /><br clear="all" />
+      <div id="thresholdMessage" style="font-size:40px; color:red;"></div>
+    </div>
+    <script>
+      var eventSelect = $('#eventSelect').MPEventSelect();
+      var propSelect  = $('#propSelect').MPPropertySelect();
+      var dateSelect  = $('#dateSelect').MPDatepicker();
+      var eventGraph  = $('#graph').MPChart({chartType: 'bar'});
+      var thresholdValue = $('#threshold').val();
+
+
+      var runQuery = function() {
+        var eventName = eventSelect.MPEventSelect('value'),
+            propName  = propSelect.MPPropertySelect('value'),
+            thresholdValue = $('#threshold').val();
+            dateRange = dateSelect.MPDatepicker('value');
+        if (eventName) {
+          MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            var totalEvents = 0;
+            eventGraph.MPChart('setData', results);
+            for(event in results.values()){
+              for(date in results.values()[event]){
+                totalEvents += results.values()[event][date];
+              }
+            }
+          if(totalEvents > thresholdValue){
+            eventDifference = totalEvents-thresholdValue;
+            $( "#thresholdMessage" ).html('! Over threshold by '+eventDifference+" data points !");
+          }
+          else{
+            $( "#thresholdMessage" ).html("");
+          }
+          var gauge1 = loadLiquidFillGauge("fillgauge1", 55);
+          var config1 = liquidFillGaugeDefaultSettings();
+          config1.circleColor = "#FF7777";
+          config1.textColor = "#FF4444";
+          config1.waveTextColor = "#FFAAAA";
+          config1.waveColor = "#FFDDDD";
+          config1.circleThickness = 0.2;
+          config1.textVertPosition = 0.2;
+          config1.waveAnimateTime = 1000;
+          });
+        }
+        setTimeout(function(){
+          runQuery();
+        }, 30000);
+      };
+      eventSelect.on('change', function(e, eventName) {
+        propSelect.MPPropertySelect('setEvent', eventName);
+        $("#by").show();
+      });
+      
+      
+      
+      /*
+      TODO: 
+      - validation in threshold input
+      */
+      
     </script>
   </body>
 </html>
