@@ -21,6 +21,7 @@
         
       <div style="clear:both;"></div>
       <div id="graph"></div><br clear="all" /><br clear="all" />
+      <div id="thresholdMessage"></div>
     </div>
     <script>
       var eventSelect = $('#eventSelect').MPEventSelect();
@@ -44,14 +45,15 @@
                 totalEvents += results.values()[event][date];
               }
             }
-          console.log(totalEvents);
+          if(totalEvents > thresholdValue){
+            $( "#thresholdMessage" ).html('<span style="font-size=40px; color=red;">ERROR, over threshold</span>');
+          }
           });
         }
       };
       eventSelect.on('change', function(e, eventName) {
         propSelect.MPPropertySelect('setEvent', eventName);
         $("#by").show();
-        //runQuery();
       });
     </script>
   </body>
